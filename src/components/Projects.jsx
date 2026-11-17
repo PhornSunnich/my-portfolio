@@ -1,74 +1,102 @@
 import React, { useState } from "react";
 import { FaExternalLinkAlt, FaGithub, FaFigma } from "react-icons/fa";
+import SectionHeader from "./SectionHeader";
 
 const projects = [
   {
     id: 1,
-    title: "JOBCollap — Career Platform",
-    category: "UX/UI Design & Frontend",
-    desc: "Designed intuitive user flows, responsive layouts, and reusable component libraries in Figma for job matching.",
-    tech: ["Figma", "UI/UX", "Wireframing", "React"],
-    live: "#",
-    github: "https://github.com/PhornSunnich/Jobcollap",
-    figma: "#",
+    title: "Student Management System",
+    category: "Backend · Java & Docker",
+    status: "Backend in production",
+    desc: "A full CRUD REST backend for managing students, enrollments and categories. Documented with Swagger, backed by PostgreSQL, containerised with a multi-stage Dockerfile and docker-compose, and deployed to production.",
+    tech: ["Java", "Spring Boot", "PostgreSQL", "Docker", "Swagger", "Gradle"],
+    live: null,
+    github: "https://github.com/PhornSunnich/student-management-system",
+    figma: null,
   },
   {
     id: 2,
-    title: "NHAM EY — Food Delivery App",
-    category: "Mobile UX Design",
-    desc: "Created interactive prototypes, wireframes, and design systems for a food ordering web and mobile application.",
-    tech: ["Figma", "Prototyping", "User Flow", "Tailwind CSS"],
-    live: "#",
-    github: "https://github.com/PhornSunnich/Khmer-Food",
-    figma: "#",
+    title: "Restaurant Ordering Platform",
+    category: "Full Stack · React Frontend",
+    status: "Production deploy coming soon",
+    desc: "A modern ordering interface built with React 19 and Vite, with Lucide icons and Canvas Confetti for delightful micro-interactions. Designed to pair with a Spring Boot backend.",
+    tech: ["React 19", "Vite", "Tailwind CSS", "Lucide Icons", "Spring Boot"],
+    live: null,
+    github: "https://github.com/PhornSunnich/restaurant-frontend",
+    figma: null,
   },
   {
     id: 3,
-    title: "E-Commerce Web Portal",
-    category: "Web Development",
-    desc: "Built a responsive online store web application utilizing React, custom UI component layouts, and Bootstrap.",
-    tech: ["React", "Bootstrap", "JavaScript"],
-    live: "#",
-    github: "https://github.com/PhornSunnich/emall_cambodia",
+    title: "NHAM EY — Food Delivery App",
+    category: "Mobile UX Design & Frontend",
+    status: "Live",
+    desc: "A Khmer food ordering web and mobile experience, from wireframes and interactive prototypes to a deployed, responsive application.",
+    tech: ["Figma", "Prototyping", "User Flow", "Tailwind CSS"],
+    live: "https://khmer-food-production.up.railway.app",
+    github: "https://github.com/PhornSunnich/Khmer-Food",
     figma: null,
   },
   {
     id: 4,
-    title: "Product Management System",
-    category: "Full Stack Development",
-    desc: "A web platform designed for managing inventory and products with full database backend implementation.",
-    tech: ["PHP", "Laravel", "MySQL"],
-    live: "#",
-    github: "https://github.com/PhornSunnich/php_assignment",
+    title: "JOBCollap — Career Platform",
+    category: "UX/UI Design & Frontend",
+    status: "Live",
+    desc: "A job matching platform with intuitive user flows, responsive layouts and a reusable component library designed in Figma and built in React.",
+    tech: ["Figma", "UI/UX", "Wireframing", "React"],
+    live: "https://final-deploy-gold.vercel.app/",
+    github: "https://github.com/PhornSunnich/Jobcollap",
     figma: null,
   },
+  {
+    id: 5,
+    title: "E-Commerce Web Portal",
+    category: "Web Development",
+    status: "Source available",
+    desc: "A responsive online store built with React, custom UI components and Bootstrap.",
+    tech: ["React", "Bootstrap", "JavaScript"],
+    live: null,
+    github: "https://github.com/PhornSunnich/emall_cambodia",
+    figma: null,
+  },
+  {
+    id: 6,
+    title: "Product Management System",
+    category: "Full Stack Development",
+    status: "Source available",
+    desc: "An inventory and product management platform with a complete database-backed Laravel implementation.",
+    tech: ["PHP", "Laravel", "MySQL"],
+    live: "https://khmer-food-production.up.railway.app",
+    github: "https://github.com/PhornSunnich/Khmer-Food",
+    figma: null,
+  }
 ];
+
+const statusStyle = (status) =>
+  status === "Live" || status === "Backend in production"
+    ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
+    : status.startsWith("Production")
+    ? "bg-amber-500/10 border-amber-500/30 text-amber-400"
+    : "bg-slate-800 border-slate-700 text-slate-400";
 
 const Projects = () => {
   const [active, setActive] = useState(0);
   const project = projects[active];
 
   return (
-    <section id="projects" className="py-24 bg-slate-900 text-white relative overflow-hidden">
+    <section
+      id="projects"
+      className="py-24 bg-slate-900 text-white relative overflow-hidden"
+    >
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-6xl mx-auto px-6 relative">
-        {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-widest mb-5">
-            Portfolio
-          </span>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">
-            Featured Projects
-          </h2>
-          <p className="text-slate-400 text-base">
-            Selected product design and web development work showcasing
-            user-centered interface design and frontend synergy.
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="Portfolio"
+          title="Featured Projects"
+          subtitle="Backend services, full-stack apps and product design, from first wireframe to deployment."
+        />
 
         <div className="grid lg:grid-cols-5 gap-6">
-          {/* Selector */}
           <div className="lg:col-span-2 flex lg:flex-col gap-3 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0">
             {projects.map((p, index) => {
               const isActive = index === active;
@@ -106,16 +134,24 @@ const Projects = () => {
             })}
           </div>
 
-          {/* Detail panel */}
           <div
             key={project.id}
-            className="lg:col-span-3 bg-slate-950/70 border border-slate-800 rounded-3xl p-8 sm:p-10 flex flex-col justify-between min-h-[22rem]"
+            className="lg:col-span-3 bg-slate-950/70 border border-slate-800 rounded-3xl p-8 sm:p-10 flex flex-col justify-between min-h-[24rem]"
           >
             <div>
-              <span className="text-xs font-semibold text-blue-400 tracking-wider uppercase">
-                {project.category}
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-bold mt-2 mb-4 text-white">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="text-xs font-semibold text-blue-400 tracking-wider uppercase">
+                  {project.category}
+                </span>
+                <span
+                  className={`text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border ${statusStyle(
+                    project.status
+                  )}`}
+                >
+                  {project.status}
+                </span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-bold mt-3 mb-4 text-white">
                 {project.title}
               </h3>
               <p className="text-slate-400 text-base leading-relaxed mb-6">
